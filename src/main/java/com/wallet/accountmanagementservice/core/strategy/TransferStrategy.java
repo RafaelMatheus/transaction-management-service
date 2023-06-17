@@ -16,8 +16,8 @@ public class TransferStrategy extends AbstractStrategy {
 
     @Override
     public AccountDomain process(String destinationAccountNumber, String originAccountNumber, BigDecimal value) {
-        var destinationAccount = port.findByAccountNumber(destinationAccountNumber);
         var originAccount = port.findByAccountNumber(originAccountNumber);
+        var destinationAccount = port.findByAccountNumber(destinationAccountNumber);
 
         if (!hasSufficientBalance(originAccount, value)) {
             throw new IinsufficientBalanceException();

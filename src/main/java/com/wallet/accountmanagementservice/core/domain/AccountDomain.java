@@ -10,6 +10,18 @@ public class AccountDomain {
     private BigDecimal balance;
     private String accountNumber;
 
+    public AccountDomain(String id, String holderTaxId, String holderName, String phoneNumber, BigDecimal balance, String accountNumber) {
+        this.id = id;
+        this.holderTaxId = holderTaxId;
+        this.holderName = holderName;
+        this.phoneNumber = phoneNumber;
+        this.balance = balance;
+        this.accountNumber = accountNumber;
+    }
+
+    public AccountDomain() {
+    }
+
     public String getId() {
         return id;
     }

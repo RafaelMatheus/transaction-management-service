@@ -18,6 +18,8 @@ public class Mapper {
         accountEntity.setAccountNumber(domain.getAccountNumber());
         accountEntity.setHolderTaxId(domain.getHolderTaxId());
         accountEntity.setBalance(domain.getBalance());
+        accountEntity.setId(domain.getId());
+        accountEntity.setPhoneNumber(domain.getPhoneNumber());
         return accountEntity;
     }
 
@@ -27,6 +29,10 @@ public class Mapper {
         accountDomain.setHolderName(entity.getHolderName());
         accountDomain.setHolderTaxId(entity.getHolderTaxId());
         accountDomain.setBalance(entity.getBalance());
+        accountDomain.setId(entity.getId());
+        accountDomain.setAccountNumber(entity.getAccountNumber());
+        accountDomain.setPhoneNumber(entity.getPhoneNumber());
+
         return accountDomain;
     }
 

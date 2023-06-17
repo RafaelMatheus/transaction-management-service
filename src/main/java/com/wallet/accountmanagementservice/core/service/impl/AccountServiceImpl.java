@@ -35,6 +35,5 @@ public class AccountServiceImpl implements AccountService {
         return factory.get(toTransactionDomain.type()).process(toTransactionDomain.destinationAccountNumber(),
                 toTransactionDomain.originAccountNumber(),
                 toTransactionDomain.value());
-
     }
 }
