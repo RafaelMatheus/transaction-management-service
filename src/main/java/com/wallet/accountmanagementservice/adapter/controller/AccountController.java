@@ -30,5 +30,4 @@ public class AccountController {
     public void executeAccountTransaction(@RequestBody TransactionRequest transactionRequest) {
         accountService.executeAccountTransaction(Mapper.toTransactionDomain(transactionRequest));
     }
-
 }

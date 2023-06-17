@@ -41,6 +41,7 @@ public class Mapper {
 
         accountDomain.setHolderName(request.holderName());
         accountDomain.setHolderTaxId(request.holderTaxId());
+        accountDomain.setPhoneNumber(request.phoneNumber());
         return accountDomain;
     }
 

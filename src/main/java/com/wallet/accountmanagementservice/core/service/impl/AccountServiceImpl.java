@@ -27,7 +27,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public AccountDomain getAccountInformation(String accountNumber) {
-        return null;
+        return port.findByAccountNumber(accountNumber);
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.wallet.accountmanagementservice.base;
 
+import com.wallet.accountmanagementservice.adapter.dtos.request.AccountRequest;
+import com.wallet.accountmanagementservice.adapter.dtos.response.AccountResponse;
 import com.wallet.accountmanagementservice.adapter.entity.AccountEntity;
 import com.wallet.accountmanagementservice.core.domain.AccountDomain;
 
@@ -29,5 +31,9 @@ public class BaseTestFactory {
 
     public static AccountDomain getAccountDomain2() {
         return new AccountDomain(ID, TAX_ID, HOLDER_NAME, PHONE_NUMBER, BALANCE, ACCOUNT_NUMBER2);
+    }
+
+    public static AccountRequest getAccountRequest(){
+        return new AccountRequest(TAX_ID, HOLDER_NAME, PHONE_NUMBER);
     }
 }
