@@ -49,4 +49,12 @@ public class AccountDomain {
     public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
+
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
 }

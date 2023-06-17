@@ -1,5 +1,6 @@
 package com.wallet.accountmanagementservice.adapter.entity;
 
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -14,8 +15,18 @@ public class AccountEntity {
     private String holderName;
     private String phoneNumber;
     private BigDecimal balance;
+    private String accountNumber;
+    @CreatedDate
     private LocalDateTime creationDate;
     private LocalDateTime updateDate;
+
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
 
     public String getId() {
         return id;

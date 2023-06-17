@@ -1,4 +1,8 @@
 package com.wallet.accountmanagementservice.adapter.dtos.request;
 
-public class AccountRequest {
+public record AccountRequest(
+        String holderTaxId,
+        String holderName,
+        String phoneNumber
+) {
 }
