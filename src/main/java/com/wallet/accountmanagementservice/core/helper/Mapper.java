@@ -1,13 +1,11 @@
 package com.wallet.accountmanagementservice.core.helper;
 
 import com.wallet.accountmanagementservice.adapter.dtos.request.AccountRequest;
+import com.wallet.accountmanagementservice.adapter.dtos.request.TransactionRequest;
 import com.wallet.accountmanagementservice.adapter.dtos.response.AccountResponse;
 import com.wallet.accountmanagementservice.adapter.entity.AccountEntity;
 import com.wallet.accountmanagementservice.core.domain.AccountDomain;
-import com.wallet.accountmanagementservice.core.domain.TransactionRabbitMqDomain;
-import com.wallet.accountmanagementservice.core.enumerated.TransactionType;
-
-import java.math.BigDecimal;
+import com.wallet.accountmanagementservice.core.domain.TransactionDomain;
 
 public class Mapper {
     private Mapper() {
@@ -46,8 +44,10 @@ public class Mapper {
                 accountDomain.getAccountNumber());
     }
 
-    public static TransactionRabbitMqDomain toTransactionRabbitDomainDeposit(AccountDomain destinationAccount, BigDecimal value) {
-        return new TransactionRabbitMqDomain(TransactionType.DEPOSIT, null, destinationAccount.getAccountNumber(), value);
+    public static TransactionDomain toTransactionDomain(TransactionRequest transactionRequest) {
+        return new TransactionDomain(transactionRequest.destinationAccountNumber(),
+                transactionRequest.originAccountNumber(),
+                transactionRequest.value(),
+                transactionRequest.type());
     }
-
 }

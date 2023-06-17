@@ -1,7 +1,7 @@
 package com.wallet.accountmanagementservice.adapter.controller;
 
-import com.wallet.accountmanagementservice.adapter.dtos.request.AccountDepositRequest;
 import com.wallet.accountmanagementservice.adapter.dtos.request.AccountRequest;
+import com.wallet.accountmanagementservice.adapter.dtos.request.TransactionRequest;
 import com.wallet.accountmanagementservice.adapter.dtos.response.AccountResponse;
 import com.wallet.accountmanagementservice.core.helper.Mapper;
 import com.wallet.accountmanagementservice.core.service.AccountService;
@@ -26,18 +26,9 @@ public class AccountController {
         return Mapper.toResponse(accountService.getAccountInformation(accountNumber));
     }
 
-    @PostMapping("/deposits")
-    public void deposit(@RequestBody AccountDepositRequest depositRequest) {
-        accountService.deposit( depositRequest.destinationAccountNumber(), depositRequest.value());
+    @PostMapping("/transaction")
+    public void executeAccountTransaction(@RequestBody TransactionRequest transactionRequest) {
+        accountService.executeAccountTransaction(Mapper.toTransactionDomain(transactionRequest));
     }
 
-    @PostMapping("/{accountNumber}/withdrawals")
-    public void withdrawals(AccountDepositRequest depositRequest) {
-        accountService.deposit(depositRequest.destinationAccountNumber(), depositRequest.value());
-    }
-
-    @PostMapping("/{accountNumber}/transfers")
-    public void transfers(AccountDepositRequest depositRequest) {
-        accountService.deposit(depositRequest.destinationAccountNumber(), depositRequest.value());
-    }
 }
