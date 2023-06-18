@@ -2,7 +2,7 @@ spring:
   data:
     mongodb:
       uri: mongodb://localhost:27017
-      database: account-management
+      database: transaction-management
   mvc:
     pathmatch:
       matching-strategy: ant-path-matcher
@@ -13,7 +13,7 @@ spring:
     password: guest
     virtual-host: b2b
 server:
-  port: 8080
+  port: 8081
 
 transaction:
   rabbit:
