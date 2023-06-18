@@ -2,7 +2,9 @@ package com.wallet.accountmanagementservice.core.strategy;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.wallet.accountmanagementservice.adapter.config.PropertiesConfiguration;
 import com.wallet.accountmanagementservice.core.domain.AccountDomain;
+import com.wallet.accountmanagementservice.core.domain.TransactionRabbitMqDomain;
 import com.wallet.accountmanagementservice.core.enumerated.TransactionType;
 import com.wallet.accountmanagementservice.core.port.AccountPort;
 import com.wallet.accountmanagementservice.core.port.RabbitMqPort;
@@ -15,10 +17,12 @@ import java.math.BigDecimal;
 public abstract class AbstractStrategy implements ProcessTransactionStrategy {
     protected final AccountPort port;
     protected final RabbitMqPort rabbitMqPort;
+    protected final PropertiesConfiguration propertiesConfiguration;
 
-    protected AbstractStrategy(AccountPort port, RabbitMqPort rabbitMqPort) {
+    protected AbstractStrategy(AccountPort port, RabbitMqPort rabbitMqPort, PropertiesConfiguration propertiesConfiguration) {
         this.port = port;
         this.rabbitMqPort = rabbitMqPort;
+        this.propertiesConfiguration = propertiesConfiguration;
     }
 
     protected boolean hasSufficientBalance(AccountDomain accountDomain, BigDecimal value) {
@@ -34,9 +38,11 @@ public abstract class AbstractStrategy implements ProcessTransactionStrategy {
                 .build();
     }
 
-    protected void sendToRabbit(Object message, TransactionType transactionType) {
+    protected void sendToQueueTransaction(TransactionRabbitMqDomain message) {
         try {
-            rabbitMqPort.send(renderMensagemFila(message), transactionType.toString());
+            rabbitMqPort.send(renderMensagemFila(message),
+                    propertiesConfiguration.getTransaction().getRabbit().getRoutingKey(),
+                    propertiesConfiguration.getTransaction().getRabbit().getExchangeName());
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }

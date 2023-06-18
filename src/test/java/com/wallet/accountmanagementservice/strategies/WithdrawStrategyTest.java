@@ -11,11 +11,11 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.math.BigDecimal;
 
-import static com.wallet.accountmanagementservice.base.BaseTestFactory.ACCOUNT_NUMBER2;
-import static com.wallet.accountmanagementservice.base.BaseTestFactory.getAccountDomain2;
+import static com.wallet.accountmanagementservice.base.BaseTestFactory.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -33,7 +33,8 @@ public class WithdrawStrategyTest {
     void shouldCalculateDepositAndSendToRabbitMq() {
         var domain = getAccountDomain2();
         when(accountPortRepository.findByAccountNumber(ACCOUNT_NUMBER2)).thenReturn(domain);
-        doNothing().when(rabbitMqPort).send(any(), any());
+        doNothing().when(rabbitMqPort).send(any(), any(), any());
+        ReflectionTestUtils.setField(withdrawStrategy, "propertiesConfiguration", getPropertiesConfiguration());
 
         withdrawStrategy.process(null, ACCOUNT_NUMBER2, BigDecimal.TEN);
 

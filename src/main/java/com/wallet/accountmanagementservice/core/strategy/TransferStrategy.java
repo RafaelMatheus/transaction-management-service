@@ -1,5 +1,6 @@
 package com.wallet.accountmanagementservice.core.strategy;
 
+import com.wallet.accountmanagementservice.adapter.config.PropertiesConfiguration;
 import com.wallet.accountmanagementservice.core.domain.AccountDomain;
 import com.wallet.accountmanagementservice.core.domain.TransactionRabbitMqDomain;
 import com.wallet.accountmanagementservice.core.enumerated.TransactionType;
@@ -10,8 +11,8 @@ import com.wallet.accountmanagementservice.core.port.RabbitMqPort;
 import java.math.BigDecimal;
 
 public class TransferStrategy extends AbstractStrategy {
-    public TransferStrategy(AccountPort port, RabbitMqPort rabbitMqPort) {
-        super(port, rabbitMqPort);
+    public TransferStrategy(AccountPort port, RabbitMqPort rabbitMqPort, PropertiesConfiguration propertiesConfiguration) {
+        super(port, rabbitMqPort, propertiesConfiguration);
     }
 
     @Override
@@ -26,7 +27,8 @@ public class TransferStrategy extends AbstractStrategy {
         destinationAccount.setBalance(destinationAccount.getBalance().add(value));
 
         var message = toTransactionRabbitDomainDeposit(originAccount, destinationAccount, value);
-        sendToRabbit(message, message.getTransactionType());
+        sendToQueueTransaction(message);
+
         return port.save(destinationAccount);
     }
 

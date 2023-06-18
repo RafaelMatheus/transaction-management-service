@@ -1,5 +1,6 @@
 package com.wallet.accountmanagementservice.core.strategy;
 
+import com.wallet.accountmanagementservice.adapter.config.PropertiesConfiguration;
 import com.wallet.accountmanagementservice.core.domain.AccountDomain;
 import com.wallet.accountmanagementservice.core.domain.TransactionRabbitMqDomain;
 import com.wallet.accountmanagementservice.core.enumerated.TransactionType;
@@ -11,8 +12,8 @@ import java.math.BigDecimal;
 
 public class WithdrawStrategy extends AbstractStrategy {
 
-    public WithdrawStrategy(AccountPort port, RabbitMqPort rabbitMqPort) {
-        super(port, rabbitMqPort);
+    public WithdrawStrategy(AccountPort port, RabbitMqPort rabbitMqPort, PropertiesConfiguration propertiesConfiguration) {
+        super(port, rabbitMqPort, propertiesConfiguration);
     }
 
     @Override
@@ -28,7 +29,7 @@ public class WithdrawStrategy extends AbstractStrategy {
         var toResponse = port.save(account);
         var message = toTransactionRabbitDomainWithdraw(account, value);
 
-        sendToRabbit(message, message.getTransactionType());
+        sendToQueueTransaction(message);
         return toResponse;
 
     }

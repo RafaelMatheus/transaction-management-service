@@ -12,7 +12,7 @@ public class RabbitMqPortImpl implements RabbitMqPort {
     }
 
     @Override
-    public void send(Message message, String routingKey) {
-        template.send("transaction-exchange", "DEPOSIT", message);
+    public void send(Message message, String routingKey, String exchange) {
+        template.send(exchange, routingKey, message);
     }
 }
