@@ -33,6 +33,7 @@ public class ServiceBeanConfig {
         var depositStrategy = new DepositStrategy(port);
         var withdrawStrategy = new WithdrawStrategy(port);
         var transferStrategy = new TransferStrategy(port);
-        return Set.of(depositStrategy, withdrawStrategy, transferStrategy);
+        var paymentStrategy = new PaymentStrategy(port);
+        return Set.of(depositStrategy, withdrawStrategy, transferStrategy, paymentStrategy);
     }
 }
