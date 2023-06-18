@@ -1,10 +1,10 @@
 package com.wallet.accountmanagementservice.strategies;
 
+import com.wallet.accountmanagementservice.adapter.config.PropertiesConfiguration;
 import com.wallet.accountmanagementservice.core.domain.AccountDomain;
 import com.wallet.accountmanagementservice.core.exception.IinsufficientBalanceException;
 import com.wallet.accountmanagementservice.core.port.RabbitMqPort;
 import com.wallet.accountmanagementservice.core.port.impl.AccountPortRepository;
-import com.wallet.accountmanagementservice.core.strategy.DepositStrategy;
 import com.wallet.accountmanagementservice.core.strategy.TransferStrategy;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,6 +12,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.math.BigDecimal;
 
@@ -35,7 +36,8 @@ public class TransferStrategyTest {
         var domain2 = getAccountDomain2();
         when(accountPortRepository.findByAccountNumber(ACCOUNT_NUMBER)).thenReturn(domain);
         when(accountPortRepository.findByAccountNumber(ACCOUNT_NUMBER2)).thenReturn(domain2);
-        doNothing().when(rabbitMqPort).send(any(), any());
+        doNothing().when(rabbitMqPort).send(any(), any(), any());
+        ReflectionTestUtils.setField(transferStrategy, "propertiesConfiguration", getPropertiesConfiguration());
 
         transferStrategy.process(ACCOUNT_NUMBER, ACCOUNT_NUMBER2, BigDecimal.TEN);
 

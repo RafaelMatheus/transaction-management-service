@@ -1,5 +1,6 @@
 package com.wallet.accountmanagementservice.base;
 
+import com.wallet.accountmanagementservice.adapter.config.PropertiesConfiguration;
 import com.wallet.accountmanagementservice.adapter.dtos.request.AccountRequest;
 import com.wallet.accountmanagementservice.adapter.dtos.response.AccountResponse;
 import com.wallet.accountmanagementservice.adapter.entity.AccountEntity;
@@ -33,7 +34,15 @@ public class BaseTestFactory {
         return new AccountDomain(ID, TAX_ID, HOLDER_NAME, PHONE_NUMBER, BALANCE, ACCOUNT_NUMBER2);
     }
 
-    public static AccountRequest getAccountRequest(){
+    public static AccountRequest getAccountRequest() {
         return new AccountRequest(TAX_ID, HOLDER_NAME, PHONE_NUMBER);
+    }
+
+    public static PropertiesConfiguration getPropertiesConfiguration() {
+        var properties = new PropertiesConfiguration();
+        var transaction = new PropertiesConfiguration.TransactionTypeConfig();
+        transaction.setRabbit(new PropertiesConfiguration.RabbitConfig());
+        properties.setTransaction(transaction);
+        return properties;
     }
 }
