@@ -14,8 +14,8 @@ import java.util.Set;
 @Configuration
 public class ServiceBeanConfig {
     @Bean
-    public TransactionService accountService(TransactionFactory factory) {
-        return new TransactionServiceImpl(factory);
+    public TransactionService transactionService(TransactionFactory factory, TransactionPortRepository repository) {
+        return new TransactionServiceImpl(factory, repository);
     }
 
     @Bean
@@ -24,12 +24,13 @@ public class ServiceBeanConfig {
     }
 
     @Bean
-    public TransactionPort accountPort(TransactionRepository repository) {
+    public TransactionPort transactionPort(TransactionRepository repository) {
         return new TransactionPortRepository(repository);
     }
+
     @Bean
     public Set<ProcessTransactionStrategy> strategies(TransactionPort port) {
-        var depositStrategy = new DepositStrategy(port );
+        var depositStrategy = new DepositStrategy(port);
         var withdrawStrategy = new WithdrawStrategy(port);
         var transferStrategy = new TransferStrategy(port);
         return Set.of(depositStrategy, withdrawStrategy, transferStrategy);
