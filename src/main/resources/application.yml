@@ -1,7 +1,7 @@
 spring:
   data:
     mongodb:
-      uri: ${RABBIT_HOST:mongodb://localhost:27017}
+      uri: mongodb://localhost:27017
       database: transaction-management
   mvc:
     pathmatch:
