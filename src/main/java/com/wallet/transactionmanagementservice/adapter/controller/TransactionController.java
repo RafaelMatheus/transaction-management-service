@@ -1,7 +1,6 @@
 package com.wallet.transactionmanagementservice.adapter.controller;
 
 import com.wallet.transactionmanagementservice.adapter.dto.TransactionResponse;
-import com.wallet.transactionmanagementservice.core.domain.TransactionDomain;
 import com.wallet.transactionmanagementservice.core.domain.TransactionHistoryPageResponse;
 import com.wallet.transactionmanagementservice.core.helper.Mapper;
 import com.wallet.transactionmanagementservice.core.service.TransactionService;

@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public abstract class AbstractStrategy implements ProcessTransactionStrategy {
-    private final Logger LOG = LoggerFactory.getLogger(AbstractStrategy.class);
+    private final Logger log = LoggerFactory.getLogger(AbstractStrategy.class);
     protected final TransactionPort port;
 
     protected AbstractStrategy(TransactionPort port) {
@@ -15,7 +15,7 @@ public abstract class AbstractStrategy implements ProcessTransactionStrategy {
 
     @Override
     public TransactionDomain process(TransactionDomain transactionDomain) {
-        LOG.info("class=AbstractStrategy, m=process, transactionType={}", transactionDomain.type());
+        log.info("class=AbstractStrategy, m=process, transactionType={}", transactionDomain.type());
         return port.save(transactionDomain);
     }
 }

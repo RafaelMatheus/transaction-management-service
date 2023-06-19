@@ -69,24 +69,6 @@
     <build>
         <plugins>
             <plugin>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>3.0.0</version>
-                <groupId>org.codehaus.mojo</groupId>
-                <executions>
-                    <execution>
-                        <id>Run Containers</id>
-                        <phase>validate</phase>
-                        <configuration>
-                            <executable>docker-compose</executable>
-                            <commandlineArgs>up --detach</commandlineArgs>
-                        </configuration>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
