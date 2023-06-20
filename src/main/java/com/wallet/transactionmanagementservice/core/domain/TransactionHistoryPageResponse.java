@@ -9,7 +9,7 @@ public class TransactionHistoryPageResponse<T> {
     private int totalPages;
 
     public static <T> TransactionHistoryPageResponse<T> of(List<T> content, int size, int pageNumber, int totalPages) {
-        return new TransactionHistoryPageResponse<T>(content, size, pageNumber, totalPages);
+        return new TransactionHistoryPageResponse<>(content, size, pageNumber, totalPages);
     }
 
     public TransactionHistoryPageResponse(List<T> content, int size, int pageNumber, int totalPages) {
