@@ -35,7 +35,7 @@ Para construir o microserviço Transaction, siga as etapas abaixo:
    ```
 
     ```bash
-   docker build -t transaction-service .
+   docker build -t transaction-management .
    ```
 
 ## Documentação do Swagger
