@@ -8,11 +8,8 @@ public class TransactionHistoryPageResponse<T> {
     private int pageNumber;
     private int totalPages;
 
-    public static <T> TransactionHistoryPageResponse<T> of(List<T> content, int size, int pageNumber, int totalPages){
-        return new TransactionHistoryPageResponse(content, size, pageNumber, totalPages);
-    }
-
-    public TransactionHistoryPageResponse() {
+    public static <T> TransactionHistoryPageResponse<T> of(List<T> content, int size, int pageNumber, int totalPages) {
+        return new TransactionHistoryPageResponse<>(content, size, pageNumber, totalPages);
     }
 
     public TransactionHistoryPageResponse(List<T> content, int size, int pageNumber, int totalPages) {

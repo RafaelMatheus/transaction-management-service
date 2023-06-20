@@ -33,7 +33,8 @@ public class SwaggerConfiguration {
                 .globalOperationParameters(List.of(traceId))
                 .select()
                 .apis(RequestHandlerSelectors.basePackage(TransactionController.class.getPackageName()))
-                .build();
+                .build()
+                .pathMapping("/transaction");
     }
 
     private ApiInfo metaData() {
